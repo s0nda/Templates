@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<meta charset="utf-8" /> <!-- HTML5 -->
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" /> <!-- HTML 4.x -->
+	<meta http-equiv="expires" content="0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+	<link href="https://fonts.googleapis.com/css?family=Arima+Madurai" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet"> 
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css?family=Arima+Madurai');
+		@import url('https://fonts.googleapis.com/css?family=Orbitron');
+		* { margin: 0; padding: 0; }
+		body { overflow-x: hidden; background-color: #fff; }
+		#page_header, #page_body, #page_footer { position: relative; width: 100%; float: left; clear: both; }
+		#page_header { overflow: hidden; background: #fff no-repeat; -moz-box-shadow: 0 6px 18px rgba(0,0,0,.68); -webkit-box-shadow: 0 6px 18px rgba(0,0,0,.68); box-shadow: 0 6px 18px rgba(0,0,0,.68); }
+		#page_header > img { display : block; } /* avoid gap between img and div */
+		#page_navi > div[class='naviElem'] { vertical-align: top; display: inline-block; margin: 3% 0 3% 8%; } 
+		.naviElem > img { width: 100%; height: auto; -moz-border-radius: 11px; -webkit-border-radius: 11px; border-radius: 11px; -moz-box-shadow: 0 5px 6px 0 rgba(0,0,0,.8); -webkit-box-shadow: 0 5px 6px 0 rgba(0,0,0,.8); box-shadow: 0 5px 6px 0 rgba(0,0,0,.8); }
+		.naviElem > div { width: 190px; margin: -3px auto 0 auto; padding: 4px; font-family: 'Orbitron', cursive; /* background-color: rgba(0,0,0,.6) */ background: linear-gradient(135deg, rgba(0,0,0,.6), #000); color: #fff; text-shadow: 1px 1px #000; -moz-box-shadow: 0 0 6px 0 rgba(0,0,0,.78); -webkit-box-shadow: 0 0 6px 0 rgba(0,0,0,.78); box-shadow: 0 0 6px 0 rgba(0,0,0,.78); -moz-border-radius: 0 0 6px 6px; -webkit-border-radius: 0 0 6px 6px; border-radius: 0 0 6px 6px; }
+		.naviElem > div > img { position: relative; float: right; clear: both; margin: -14% 5% 0 0; }
+		.naviElem > div > p { margin-top: 20%; padding: 0 1% 4% 2%; } 
+		#page_content { background-color: #fff; }
+		*[class="section"] { margin-bottom: 20px; background: yellow; }		
+		#page_footer { background-color: #848484; }
+	</style>
+	<title></title>
+</head> 
+<body>
+
+<div id="page_header">
+</div> <!-- END page_header -->
+
+<div id="page_navi">
+	<div class="naviElem">
+		<img name="" src="assets/imgs/navi/beach_220x147.jpg" />
+		<div>
+			<img src="assets/imgs/navi/circ_40x38.png" />
+			<p>Immediately invoked function expression</p>
+		</div>
+	</div>
+	<div class="naviElem">
+		<img name="" src="assets/imgs/navi/hongkong_220x147.jpg" />
+		<div>
+			<img src="assets/imgs/navi/circ_40x38.png" />
+			<p>Virutal DOM (JS)</p>
+		</div>
+	</div>
+	<div class="naviElem">
+		<img name="" src="assets/imgs/navi/manhattan_220x147.jpg" />
+		<div>
+			<img src="assets/imgs/navi/circ_40x38.png" />
+			<p>Gimp (I)</p>
+		</div>
+	</div>
+</div> <!-- END page_navi -->
+
+<div id="page_content">
+	<div class="section">Section 1</div>
+	<div class="section">Section 2</div>
+	<div class="section">Section 3</div>
+	<div class="section">Section 4</div>
+	<div class="section">Section 5</div>
+	<div class="section">Section 6</div>
+</div> <!-- END page_content -->
+
+<div id="page_footer">
+	<p>Page Footer</p>
+</div> <!-- END page_footer -->
+
+<script type="text/javascript">
+//
+var Template = (function($) {
+	const DEFAULT_BACKGORUND_IMAGE_URL = "assets/imgs/background/bgNewYork_1600_1080.png";
+	const DEFAULT_DELAY_PER_FRAME = 16; // 16 [ms]; because 60 fps => (1000 / 60) [ms/frame] ~ 16 */
+
+	let pHeader;
+
+	return {
+		/*
+		 * Invoke all initial steps
+		 * @params
+		 */
+		init : function () {
+			pHeader = $("page_header"); //pHeader = document.getElementById("page_header");
+			if ( !pHeader ) return;
+			this.config();
+			this.fadeIn();
+		}, // END (init)
+		
+		/*
+		 * Invoke all neccessary steps for background image: determining resolution, loading, scaling
+		 * @params
+		 */
+		config : function () {
+			/* Determine the screen resolution */
+			let scrW = window.screen.availWidth, // https://developer.mozilla.org/en-US/docs/Web/API/Screen/availHeight
+				scrH = window.screen.availHeight, // availHeight = window.screen.width - (Dock.height + MenueBar.height),
+				url = "assets/imgs/background/bgParis_" + scrW + "x" + scrH + ".jpg";
+			
+			/* Set background image by means of screen resolution */
+			let img = new Image();
+			img.src = url;
+
+			// Note: Code within the 'onload' and 'onerror' block will be called last after all other code lines before 
+			//		 and after them have been invoked already.
+			img.onload = () => { // Note: Arrow function loses its own bindings to 'this', 'arguments', 'super' or 'new.target'
+				scaleImg(img, scrW, scrH);
+			};
+			img.onerror = () => { // If image with given 'url' cannot be loaded, reset the 'url' attribute of Image and reload it 
+				url = DEFAULT_BACKGORUND_IMAGE_URL;
+				img.src = url; // reset 'url' attribute of Image
+				scaleImg(img, scrW, scrH);
+			};
+
+			pHeader.style.opacity = 0;
+			pHeader.filter = "opacity(alpha=0)";
+			pHeader.appendChild(img); // add Image object to header-div to show it
+			pHeader.style.height = scrH + "px"; // set height of div-container
+
+			document.getElementById("page_footer").appendChild(document.createTextNode("Resolution:" + scrW + "x" + scrH));
+		}, // END (config)
+		
+		/*
+		 * Execute the fading-in effect for background image
+		 * @params
+		 */
+		fadeIn : function ( duration=1 /* in second, default=1s */ ) {
+			if ( duration <= 0 ) {
+				pHeader.style.opacity = 1;
+				pHeader.style.filter = "alpha(opacity=100)";
+				return;
+			}
+			let curOpac = 0, /* <int>, current opacity */
+				delay = 2 * DEFAULT_DELAY_PER_FRAME, /* <int>, time between two frames; N * 60 fps => N * (1000 / 60) [ms/frame] = N * 16 */
+				fadeId = null; /* <int>, timer id */
+			let step = ( duration > 1 ) ? delay * duration : delay;
+			step = 1 / step;
+			
+			/* Start timer (animation) */
+			fadeId = window.setInterval( () => fn(), delay);
+			
+			/*
+			 * Helper function
+			 * @params
+			 */
+			function fn () {
+				if ( curOpac >= 1 ) {
+					pHeader.style.opacity = 1;
+					pHeader.style.filter = "alpha(opacity=100)";
+					clearInterval(fadeId);
+				}
+				curOpac += step;
+				pHeader.style.opacity = curOpac;
+				pHeader.style.filter = "alpha(opacity=" + (100*curOpac) + ")";
+			}
+		}, // END (fadeIn)
+
+		/*
+		 * Use canvas to redraw and scale/resize image
+		 */
+		scaleImg : function (img, new_width, new_height) {
+			let mCanvas = document.createElement("canvas"),
+				mCtx = mCanvas.getContext("2d");
+			mCanvas.width = new_width;
+			mCanvas.height = new_height;
+			mCtx.drawImage(img, 0, 0, mCanvas.width, mCanvas.height);
+		}, // END (resizeImage)
+
+	};
+})(/* Call back function */ function (id) { return document.getElementById(id); });
+ 
+/*
+ * Start script
+ */
+document.addEventListener("DOMContentLoaded", () => { // Note: Arrow function loses its own bindings to 'this', 'arguments', 'super' or 'new.target'
+	Template.init();
+}, false);
+</script>
+
+</body>
+
+</html>
