@@ -39,11 +39,11 @@ div#page_header_languages:hover { cursor: pointer; height: 6.6em; }
 #page_content > div[class] { padding: 10px 20px 30px 20px; font-family: 'Verdana'; }
 /* class="title_language_menue" */
 #page_content > div[class] > p:first-child > span:not(:first-child) { display: none; }
-#page_content > div[class] > p:first-child > span:first-child { display: inline-block; }
+#page_content > div[class] > p:first-child > span:first-of-type { display: block; }
 /* class="content_language" */
 #page_content > div[class] > p:first-child { text-align: center; margin: 20px 0 20px 0; font-size: 20px; cursor: pointer; }
 #page_content > div[class] > p:not(:first-child) { display: none; }
-#page_content > div[class] > p:not(:first-child):nth-child(2) { display: inline-block; }
+#page_content > div[class] > p:not(:first-child):nth-of-type(2) { display: block; }
 /*=======================================================================================================*/
 @keyframes underline_width {
     0%   { width: 8ch; }
