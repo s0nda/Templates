@@ -303,12 +303,12 @@ var Template = (function($) {
 				// Make content of new current language visible (display: inline-block)
 				for (let i = current_language_index; i < pContent_section_titles.length; i+=numberOfLanguages) {
 					//pContent_section_titles[i].style.visibility = "visible";
-					pContent_section_titles[i].style.display = "inline-block"; // show title
+					pContent_section_titles[i].style.display = "block"; // show title, inline-block
 					pContent_section_titles[i].nextSibling.style.display = "block"; // show underline
 				}
 				for (let i = current_language_index; i < pContent_section_contents.length; i+=numberOfLanguages) {
 					//pContent_section_contents[i].style.visibility = "visible";
-					pContent_section_contents[i].style.display = "inline-block"; // show content
+					pContent_section_contents[i].style.display = "block"; // show content, inline-block
 				}
 			}
 		}, // END (config_page_head_languages)

@@ -23,28 +23,30 @@ body { overflow-x: hidden; background-color: #fff; background-size: cover; }
     75%  { height: 5.0em; }
     100% { height: 6.6em; }
 }
-ul.dropdown_menue { list-style: none; }
+div#page_header_languages {
+    overflow-y: hidden; position: absolute; margin: 0; z-index: 99;
+    vertical-align: baseline; text-align: center; transition: height .75s ease;
+    height: 1.6em; /* 1em == height of a letter in a line */;
+    width: 100%; float: right;
+}
+div#page_header_languages:hover { cursor: pointer; height: 6.6em; }
+
+ul.dropdown_menue { list-style: none; float: right; margin: 2px 6px 0 0; }
 ul.dropdown_menue > li { 
     margin: 0; padding: 1px 6px 4px 6px; color:#fff; font-family: "Segoe UI", "Segoe", "Arial", "Tahoma", "Verdana";
 }
 ul.dropdown_menue > li:not(:first-child):hover { background-color:#f2f4f4; color: #000; }
 ul.dropdown_menue > li:first-child { font-weight: bold; }
-div#page_header_languages {
-    overflow-y: hidden; position: absolute; margin: 4px 0 0 4px; height: 1.6em; /* 1em == height of a letter in a line */
-    vertical-align: baseline; text-align: center; transition: height .75s ease;
-    padding: 0; z-index: 99;
-}
-div#page_header_languages:hover { cursor: pointer; height: 6.6em; }
 /*=======================================================================================================*/
 #page_content { background-color: #fff; }
 #page_content > div[class] { padding: 10px 20px 30px 20px; font-family: 'Verdana'; }
 /* class="title_language_menue" */
-#page_content > div[class] > p:first-child > span:not(:first-child) { display: none; }
-#page_content > div[class] > p:first-child > span:first-child { display: inline-block; }
+#page_content > div[class] > p:first-of-type > span:not(:first-of-type) { display: none; }
+#page_content > div[class] > p:first-of-type > span:first-of-type { display: block; } /* inline-block */
+#page_content > div[class] > p:first-of-type { text-align: center; margin: 20px 0 20px 0; font-size: 20px; cursor: pointer; }
 /* class="content_language" */
-#page_content > div[class] > p:first-child { text-align: center; margin: 20px 0 20px 0; font-size: 20px; cursor: pointer; }
-#page_content > div[class] > p:not(:first-child) { display: none; }
-#page_content > div[class] > p:not(:first-child):nth-child(2) { display: inline-block; }
+#page_content > div[class] > p[class]:not(:first-of-type) { display: none; }
+#page_content > div[class] > p[class]:not(:first-of-type):nth-of-type(2) { display: block; } /* inline-block *
 /*=======================================================================================================*/
 @keyframes underline_width {
     0%   { width: 8ch; }
