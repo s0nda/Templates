@@ -46,7 +46,7 @@ var Template = (function($) {
 	// Constants
 	//
 	const CONST_DELAY_PER_FRAME = 24; // 16 [ms]; because 60 fps => (1000 / 60) [ms/frame] ~ 16 */
-	const CONST_SCALING_FACTOR = 0.33;
+	const CONST_SCALING_FACTOR = 0.75; // 0.33;
 
 	let pHeader;
 	let pContent_section_contents;
@@ -184,9 +184,12 @@ var Template = (function($) {
 			//
 			// If screen is in portrait mode, scale it using scaling factor
 			//
+			/*
 			if (portrait) {
 				scrH *= CONST_SCALING_FACTOR;
 			}
+			*/
+			scrH = CONST_SCALING_FACTOR * scrW; // Height must always be 3/4 of Width
 			pHeader.style.height = scrH + "px"; // set height of div-container
 			pHeader.style.opacity = 0;
 			pHeader.filter = "opacity(alpha=0)";

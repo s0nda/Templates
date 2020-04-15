@@ -14,7 +14,7 @@ body { overflow-x: hidden; background-color: #fff; background-size: cover; }
 /*=======================================================================================================*/
 #page_header, #page_content, #page_footer { width: 100%; float: left; clear: both; }
 /*=======================================================================================================*/
-#page_header { overflow: hidden; background: #fff no-repeat; }
+#page_header { overflow: hidden; background: #fff no-repeat; position: relative; }
 /*=======================================================================================================*/
 @keyframes display_vertical {
     0%   { height: 1.6em; }
@@ -47,7 +47,10 @@ ul.tags > li {
 }
 /*=======================================================================================================*/
 #page_content { background-color: #fff; }
-#page_content > div[class] { padding: 10px 20px 30px 20px; font-family: 'Verdana'; }
+#page_content > div[class] { 
+	overflow-y: auto; /* auto height-wrap content within <section> */
+	padding: 10px 20px 30px 20px; font-family: 'Verdana';
+}
 /* class="title_language_menue" */
 #page_content > div[class] > p:first-of-type > span:not(:first-of-type) { display: none; }
 #page_content > div[class] > p:first-of-type > span:first-of-type { display: block; } /* inline-block */
