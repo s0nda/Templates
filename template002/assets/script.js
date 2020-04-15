@@ -46,7 +46,7 @@ var Template = (function($) {
 	// Constants
 	//
 	const CONST_DELAY_PER_FRAME = 24; // 16 [ms]; because 60 fps => (1000 / 60) [ms/frame] ~ 16 */
-	const CONST_SCALING_FACTOR = 0.75; // 0.33;
+	const CONST_SCALING_FACTOR = 0.70; // 0.33;
 
 	let pHeader;
 	let pContent_section_contents;
